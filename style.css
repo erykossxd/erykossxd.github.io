@@ -158,6 +158,52 @@ footer {
     color: #777;
 }
 
+.news-list {
+    margin-top: 20px;
+}
+
+.news-item {
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #333;
+}
+
+.news-item:last-child {
+    border-bottom: none;
+}
+
+.news-date {
+    color: #777;
+    font-size: 0.9em;
+    margin: 5px 0;
+}
+
+.news-preview {
+    margin-top: 10px;
+}
+
+.news-content h2 {
+    margin-top: 25px;
+    color: #8b0000;
+}
+
+.news-content ul {
+    padding-left: 20px;
+}
+
+.news-content li {
+    margin-bottom: 8px;
+}
+
+.news-btn {
+    background-color: #333;
+    color: white;
+}
+
+.news-btn:hover {
+    background-color: #444;
+}
+
 @media (max-width: 600px) {
     .bitcoin-donation {
         flex-direction: column;
