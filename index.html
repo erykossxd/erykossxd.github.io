@@ -60,36 +60,37 @@
     </div>
 
     <script>
-        async function updateServerStatus() {
-            const serverIP = 'erykoss.mooo.com';
-            const serverPort = 25565;
+    async function updateServerStatus() {
+        const serverIP = 'erykoss.mooo.com';
+        
+        try {
+            const response = await fetch(`https://api.mcsrvstat.us/2/${serverIP}`);
+            const data = await response.json();
             
-            try {
-                const status = await MinecraftServerUtil.status(serverIP, { port: serverPort });
-                
+            if (data.online) {
                 document.getElementById('server-status').className = 'online';
                 document.getElementById('server-status').textContent = 'Online';
-                
                 document.getElementById('players-online').textContent = 
-                    `${status.players.online} / ${status.players.max}`;
-                
+                    `${data.players.online} / ${data.players.max}`;
                 document.getElementById('server-version').textContent = 
-                    `${status.version.name} (1.8-1.21.8 supported)`;
-                
-                const now = new Date();
-                document.getElementById('last-updated').textContent = 
-                    now.toLocaleString();
-                
-            } catch (error) {
-                document.getElementById('server-status').className = 'offline';
-                document.getElementById('server-status').textContent = 'Offline';
-                document.getElementById('players-online').textContent = '0 / 100';
-                console.error('Server check failed:', error);
+                    `${data.version} (1.8-1.21.8 supported)`;
+            } else {
+                throw new Error('Server offline');
             }
+            
+            const now = new Date();
+            document.getElementById('last-updated').textContent = now.toLocaleString();
+            
+        } catch (error) {
+            document.getElementById('server-status').className = 'offline';
+            document.getElementById('server-status').textContent = 'Offline';
+            document.getElementById('players-online').textContent = '0 / 100';
+            console.error('Server check failed:', error);
         }
+    }
 
-        updateServerStatus();
-        setInterval(updateServerStatus, 60000);
-    </script>
+    updateServerStatus();
+    setInterval(updateServerStatus, 60000);
+</script>
 </body>
 </html>
