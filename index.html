@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Erykoss' Anarchy Server</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="favicon.gif" type="image/gif">
+    <link rel="alternate icon" href="favicon.ico" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/minecraft-server-util@5.3.0/dist/index.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>ERYKOSS.MOOO.COM</h1>
+            <p class="subtitle">TRUE 1.20.6 ANARCHY | 1.8-1.21.8 SUPPORT | NON-PREMIUM</p>
+        </header>
+
+        <div class="content-box">
+            <h2>🔥 WELCOME TO CHAOS 🔥</h2>
+            <p>No rules. No admins. No mercy. None of that at all.</p>
+            <p>Grief, hack, and survive in a lawless world.</p>
+            
+            <div class="server-status">
+                <h3>SERVER STATUS</h3>
+                <table>
+                    <tr>
+                        <td><strong>Java IP:</strong></td>
+                        <td id="server-ip">erykoss.mooo.com</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Server Status:</strong></td>
+                        <td id="server-status">Checking...</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Last Ping:</strong></td>
+                        <td id="last-ping">Just now</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Server Version:</strong></td>
+                        <td id="server-version">1.20.6 (1.8-1.21.8 supported)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Players Online:</strong></td>
+                        <td id="players-online">0 / 100</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Last Updated:</strong></td>
+                        <td id="last-updated">Loading...</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="buttons">
+                <a href="donate.html" class="btn donate-btn">💸 DONATE</a>
+                <a href="https://discord.gg/b2VwFGxsyv" class="btn discord-btn">💬 JOIN DISCORD</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function updateServerStatus() {
+            const serverIP = 'erykoss.mooo.com';
+            const serverPort = 25565;
+            
+            try {
+                const status = await MinecraftServerUtil.status(serverIP, { port: serverPort });
+                
+                document.getElementById('server-status').className = 'online';
+                document.getElementById('server-status').textContent = 'Online';
+                
+                document.getElementById('players-online').textContent = 
+                    `${status.players.online} / ${status.players.max}`;
+                
+                document.getElementById('server-version').textContent = 
+                    `${status.version.name} (1.8-1.21.8 supported)`;
+                
+                const now = new Date();
+                document.getElementById('last-updated').textContent = 
+                    now.toLocaleString();
+                
+            } catch (error) {
+                document.getElementById('server-status').className = 'offline';
+                document.getElementById('server-status').textContent = 'Offline';
+                document.getElementById('players-online').textContent = '0 / 100';
+                console.error('Server check failed:', error);
+            }
+        }
+
+        updateServerStatus();
+        setInterval(updateServerStatus, 60000);
+    </script>
+</body>
+</html>
