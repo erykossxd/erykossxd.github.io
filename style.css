@@ -204,6 +204,34 @@ footer {
     background-color: #444;
 }
 
+.vote-sites {
+    margin-top: 20px;
+}
+
+.vote-site {
+    background-color: #222;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-left: 4px solid #8b0000;
+}
+
+.vote-site h3 {
+    color: #e0e0e0;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.2em;
+}
+
+.vote-btn {
+    background-color: #8b0000;
+    color: white;
+}
+
+.vote-btn:hover {
+    background-color: #6d0000;
+}
+
 @media (max-width: 600px) {
     .bitcoin-donation {
         flex-direction: column;
